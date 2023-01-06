@@ -28,7 +28,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'nohup java -jar /var/lib/jenkins/workspace/PetClinicDeclarativePipeline/target/*.jar &'
+                withEnv(['JENKINS_NODE_COOKIE=dontKillMe']) {
+                    sh 'nohup java -jar /var/lib/jenkins/workspace/PetClinicDeclarativePipeline/target/*.jar &'
+                }
             }
         }
     }
